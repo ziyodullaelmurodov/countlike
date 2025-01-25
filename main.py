@@ -9,11 +9,15 @@ def start(update: Update, context):
 def replyphoto(update: Update, context: CallbackContext):
     ph=update.message.photo[-1].file_id
     update.message.reply_photo(photo=ph)
-
+    inline_button = InlineKeyboardButton(text="Like👍", callback_data="like")
+    inline_button2 = InlineKeyboardButton(text="Dislike👎", callback_data="dislike")
+    inline_keyboard = InlineKeyboardMarkup([[inline_button],[inline_button2]])
+    update.message.reply_photo(photo=ph, reply_markup=inline_keyboard)
 def ilb(update: Update, context: CallbackContext):
     inline_button = InlineKeyboardButton(text="Codewars", url="https://www.codewars.com")    
     inline_keyboard = InlineKeyboardMarkup([[inline_button]])
     update.message.reply_text("Codewarsga o'tish uchun tugmani bosing", reply_markup=inline_keyboard)
+
 TOKEN = os.getenv("TOKEN")
 
 updater = Updater(token=TOKEN)
